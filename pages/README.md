@@ -1,0 +1,4 @@
+# Pages Klasörü
+Bu klasörde frontend tarafındaki HTML(EJS) sayfalarınızı bulabilirsiniz. Yani kullanıcının göreceği sayfaları burada oluşturabilirsiniz. Sayfalarda kullanacağınız stil dosyalarını, resim dosyalarını, video dosyalarını, ses dosyalarını vb. dosyaları [public](../public/README.md) klasörüne koyabilirsiniz. Ayrıca sayfalarda kullanacağınız script dosyalarını [scripts](../scripts/README.md) klasörüne koyabilirsiniz.
+
+EJS neyin nesi diye merak ediyorsanız, HTML dosyalarınızda backend tarafından aldığınız verileri kullanmanızı sağlayan bir şey diyebiliriz. Mesela `<a>Merhaba <%= isim %></a>` kodunu kullanarak, backend tarafından sayfaya gönderilen `isim` değişkenini kullanabilirsiniz. Bu sayede sayfalarınızda değişkenler kullanabilir, döngüler ve koşullar yazabilirsiniz.

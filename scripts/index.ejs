@@ -1,0 +1,24 @@
+<script>
+    // Index sayfasinin frontend javascript kodlari buraya gelecek
+
+    function initMap() {
+        let zonguldak = {
+            lat: 41.4565,
+            lng: 31.7986
+        };
+
+        let map = new google.maps.Map(
+            document.getElementById('map'), {
+                zoom: 13,
+                center: zonguldak
+            }
+        );
+
+        let marker = new google.maps.Marker({
+            position: zonguldak,
+            map: map
+        })
+
+        console.log("Harita yüklendi");
+    }
+</script>

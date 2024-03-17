@@ -1,0 +1,82 @@
+* {
+    box-sizing: content-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #d1cebd;
+}
+
+li,
+a,
+button {
+    font-family: 'Rubik';
+    font-weight: 700;
+    font-size: 20px;
+    color: #8a0c27;
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 10%;
+    background-color: #edefe8;
+
+}
+
+
+.logo {
+    cursor: pointer;
+    margin-right: auto;
+}
+
+.nav_links {
+    list-style: none;
+
+}
+
+.nav_links li {
+    display: inline-block;
+    padding: 20px 20px;
+    background-color: #edefe8;
+
+}
+
+.nav_links li a {
+    transition: all 0.3s ease 0s;
+}
+
+.nav_links li a:hover {
+    color: #f57b51;
+}
+
+button {
+    height: 33px;
+    width: 150px;
+    pad: 100px 100px;
+    background-color: #8a0c27;
+    color: #edefe8;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+
+}
+
+button:hover {
+    background-color: #f57b51;
+
+}
+
+#map {
+    width: 850px; /* Harita genişliğini %100 yap */
+    height: 500px; /* Harita yüksekliğini belirle */
+    margin-top: 70px; /* Üstten boşluk */
+    margin-left: 30px; /* Soldan boşluk */
+    border: 5px solid #8a0c27; /* Kenarlık */
+    position: relative;
+    z-index: 1;
+}
