@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolaylokma - Ne yesek diye düşünme derdine son!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chau+Philomene+One&family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    <header>
+            <img class="logo" src="resimler/Kolaylokma.png" alt="Kolaylokma logo" style="width:150px; height: auto;">
+        <nav>
+            <ul class="nav_links">
+                <li><a href="#">Giriş Yap</a></li>
+                <li><a href="#">Kayıt Ol</a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="#"><button>Hakkımızda</button></a>
+
+    </header>
+
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            let zonguldak = {lat: 41.4565, lng: 31.7986};
+            let map = new google.maps.Map(document.getElementById('map'), {zoom: 6, center: zonguldak});
+            let marker = new google.maps.Marker({position: zonguldak, map: map})
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIUoFnMMOuLhmP82dbfJ67uDdZgEttcMM&libraries=places&callback=initMap""></script>
+    
+    
+</body>
+</html>
