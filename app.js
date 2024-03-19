@@ -1,18 +1,24 @@
 const express = require('express');
 const app = express();
 
-app.use(express.static('public')); // Stil ve resim dosyalarına erişim için public klasörünü tanımladık
+const bodyParser = require('body-parser');
+const path = require('path');
 
 app.set('view engine', 'ejs'); // View Engine olarak ejs kullanılacağını belirttik
 app.set('views', __dirname + '/pages'); // Sayfaların bulunduğu klasör yolunu belirttik
 
-app.get('/', (req, res) => {
-    res.render('index');
-});
+const adminRoutes = require('./routes/admin');
+const usersRoutes = require('./routes/users');
 
-app.get('/hakkimizda', function (req, res) {
-    res.render('about');
-});
+const errorController = require('./controllers/error');
+
+app.use(express.static('public')); // Stil ve resim dosyalarına erişim için public klasörünü tanımladık
+app.use(bodyParser.urlencoded({extended:false}));
+
+app.use('/admin',adminRoutes);
+app.use(usersRoutes);
+
+app.use(errorController.get404Page);
 
 app.get('/login', function (req, res) {
     res.render('account/login');
