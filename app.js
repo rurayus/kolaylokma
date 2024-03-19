@@ -18,4 +18,6 @@ app.get('/login', function (req, res) {
     res.render('account/login');
 })
 
-app.listen(1453);
+app.listen(1453,()=>{
+    console.log('Listening on port 1453');
+});
