@@ -1,24 +1,21 @@
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script>
-    // Index sayfasinin frontend javascript kodlari buraya gelecek
+    // Leaflet haritasını oluştur
+    var map = L.map('map').setView([41.4507, 31.7627], 15);
 
-    function initMap() {
-        let zonguldak = {
-            lat: 41.4565,
-            lng: 31.7986
-        };
+    // Harita stilini ayarla (isteğe bağlı)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
 
-        let map = new google.maps.Map(
-            document.getElementById('map'), {
-                zoom: 13,
-                center: zonguldak
-            }
-        );
+    var customIcon = L.icon({
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/4287/4287725.png',
+        iconSize: [40, 40], // size of the icon
+    });
 
-        let marker = new google.maps.Marker({
-            position: zonguldak,
-            map: map
-        })
-
-        console.log("Harita yüklendi");
-    }
+    _data.restaurants.forEach(restaurant => {
+        var marker = L.marker(restaurant.location, {
+            icon: customIcon
+        }).addTo(map).bindPopup(restaurant.name).openPopup();
+    });
 </script>
