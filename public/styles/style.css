@@ -1,7 +1,8 @@
 * {
-    box-sizing: content-box;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Rubik';
 }
 
 body {
@@ -24,9 +25,9 @@ header {
     align-items: center;
     padding: 20px 10%;
     background-color: #edefe8;
+    
 
 }
-
 
 .logo {
     cursor: pointer;
@@ -80,3 +81,140 @@ button:hover {
     position: relative;
     z-index: 1;
 }
+
+
+
+.wrapper {
+
+    align-items: center;
+    justify-content: center;
+    background:#edefe8;
+    color: #8a0c27;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width:420px; 
+    border-radius: 10px;
+    padding: 30px 40px;
+
+}
+
+.wrapper h1 {
+    font-family: 'Rubik';
+    font-size: 36px;
+    text-align: center;
+    height: auto;
+}
+
+
+.wrapper .input-box {
+    position: relative;
+    font-family: 'Rubik';
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    outline: none;
+    border: none;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 40px;
+    padding-right: 30px;
+    font-size: 17px;
+    padding: 20px 45px 20px 20px; 
+}
+
+.input-box input::placeholder {
+    color: black;
+}
+
+/* .bx-user {} */
+
+
+/* .bx-key {} */
+
+.wrapper .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    margin: -15px 0 15px;
+}
+
+.remember-forgot label input {
+    accent-color: black;
+    margin-right: 3px;
+}
+
+.remember-forgot a {
+    font-size: 15px;
+    transition: all 0.3s ease 0s; 
+}
+
+.remember-forgot a:hover {
+    color: #f57b51;
+}
+
+.wrapper .btn {
+    width: 100%;
+    height: 50px;
+    font-weight: 500;
+}
+
+.register_link {
+    text-align: center;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.register_link a {
+    font-size: 15px;
+    transition: all 0.3s ease; /* Geçiş efekti için */
+}
+
+.register_link a:hover {
+    color:#f57b51; /* Hover durumunda metnin rengini değiştirme */
+}
+
+.wrapper-register {
+    align-items: center;
+    justify-content: center;
+    background:#edefe8;
+    color: #8a0c27;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width:420px; 
+    border-radius: 10px;
+    padding: 30px 30px;
+    margin-top: 35px;
+}
+.wrapper-register h1 {
+    font-family: 'Rubik';
+    font-size: 36px;
+    text-align: center;
+    height: auto;
+}
+
+
+.wrapper-register .input-box {
+    position: relative;
+    font-family: 'Rubik';
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+.wrapper-register .btn {
+    width: 100%;
+    height: 50px;
+    font-weight: 500;
+}
+
