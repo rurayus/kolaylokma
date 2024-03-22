@@ -29,3 +29,11 @@ exports.getRegister = (req, res, next) => {
         title: 'Kolaylokma - Kayıt Ol'
     });
 }
+
+exports.postLogin = (req, res, next) => {
+    res.redirect('/');
+}
+
+exports.postRegister = (req, res, next) => {
+    res.redirect('/');
+}
