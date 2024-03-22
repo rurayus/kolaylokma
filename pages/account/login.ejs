@@ -1,3 +1,31 @@
-<%- include('../layouts/main-layout', { title: 'Login', body: ''}) %>
-<h1>Login</h1>
+<%- include('../layouts/main-layout', { title: 'Giriş Yap', body: ''}) %>
+
+   <div class="wrapper">
+    <form name="vform" action="">
+        <h1>Giriş Yap</h1>
+
+        <div class="input-box">
+            <input name="username" type="text" placeholder="Kullanıcı adı" required>
+            <div id="username_error" class="val_error"></div>
+        </div>
+
+        <div class= "input-box">
+            <input name="password" type="password" placeholder="Şifre" required>
+            <div id="password_error" class="val_error"></div>
+        </div>
+
+        <div class="remember-forgot">
+            <label><input type="checkbox">Beni hatırla</label>
+            <a href="#">Şifremi unuttum</a>
+        </div>
+
+        <button type="submit" class="btn">Giriş Yap</button>
+
+        <div class="register_link">
+            <p>Hesabın yok mu? <a style="font-size: 15px;" href="/register">Kayıt Ol</a></p>
+        </div>
+
+    </form>
+   </div>
+
 <%- include('../../scripts/account/login.ejs') %>
