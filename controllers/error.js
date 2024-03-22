@@ -1,3 +1,3 @@
-exports.get404Page = (req, res)=>{
-    res.status(404).render('error/404',{Title: 'Error!'});
+exports.get404Page = (req, res) => {
+    res.status(404).render('error/404', { title: 'Kolaylokma - Sayfa Bulunamadı' });
 }
