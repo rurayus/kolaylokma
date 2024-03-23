@@ -1,6 +1,13 @@
+require("dotenv").config();
+// .env dosyasini uygulama genelinde kullanmak icin bu satiri ekledik
+// bundan sonra "process.env" ile .env dosyasindaki degiskenlere erisebiliriz
+// mesela "process.env.DB_HOST" ile .env dosyasindaki "DB_HOST" degerine erisebiliriz
+
 const express = require('express');
 const expressPartials = require('express-partials')
 const app = express();
+
+const db = require('./database/index');
 
 const bodyParser = require('body-parser');
 const path = require('path');
