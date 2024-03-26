@@ -1,6 +1,5 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script>
-    var restaurants = JSON.stringify(restaurants);
     // Leaflet haritasını oluştur
     var map = L.map('map').setView([41.4507, 31.7627], 15);
 
@@ -13,12 +12,13 @@
         iconUrl: 'https://cdn-icons-png.flaticon.com/512/4287/4287725.png',
         iconSize:     [40, 40], // size of the icon
     });
-
-    /*restaurants.forEach(function(restaurant) {
+     
+    const restaurants = <%- restaurants %>
+    restaurants.forEach(function(restaurant) {
     
-        var marker = L.marker(restaurant.location).addTo(map).bindPopup(restaurant.name).openPopup;
+        var marker = L.marker((restaurant.location),{icon:customIcon}).addTo(map).bindPopup(restaurant.name).openPopup;
 
-    });*/
+    });
 
-    var marker = L.marker([41.4507, 31.7627],{icon:customIcon}).addTo(map).bindPopup("Canım Zongi <3").openPopup
+   /* var marker = L.marker([41.4507, 31.7627],{icon:customIcon}).addTo(map).bindPopup("Canım Zongi <3").openPopup  */
 </script>

@@ -3,7 +3,7 @@ const Restaurant = require('../models/restaurants')
 exports.getIndex = (req,res,next)=>{
     const restaurants = Restaurant.getAll(); 
     res.render('users/index', {
-        restaurants:restaurants,
+        restaurants:JSON.stringify(restaurants),
         path:'/'});
 }
 

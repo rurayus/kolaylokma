@@ -6,6 +6,7 @@ const adminController = require('../controllers/admin')
 router.get('/deneme',adminController.getDeneme);
 router.get('/restaurants',adminController.getRestaurant);
 router.get('/add-restaurant',adminController.getAddRestaurant);
+router.get('/add-restaurant',adminController.postAddRestaurant);
 router.get('/edit-restaurant',adminController.getEditRestaurant);
 
 module.exports = router;

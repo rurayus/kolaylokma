@@ -25,7 +25,7 @@ exports.postAddRestaurant = (req,res,next)=>{
     restaurant.name = req.body.name;
     restaurant.location = req.body.location;
     restaurant.icon = req.body.icon;
-    restaurant.menu = restaurant.menu;
+    restaurant.menu = req.body.menu;
 
     restaurant.saveRestaurant();
     res.redirect('/');

@@ -1,6 +1,8 @@
 const restaurants = [
     {id:"11111", name:'Restoran 1', location:[41.4507,31.7627], icon:"https://cdn-icons-png.flaticon.com/512/4287/4287725.png", menu:'1' },
-    {id:"11112", name:'Restoran 1', location:[41.4517,31.7627], icon:"https://cdn-icons-png.flaticon.com/512/4287/4287725.png", menu:'2' }
+    {id:"11112", name:'Restoran 2', location:[41.4517,31.7627], icon:"https://cdn-icons-png.flaticon.com/512/4287/4287725.png", menu:'2' },
+    {id:"11113", name:'Restoran 3', location:[41.4527,31.7627], icon:"https://cdn-icons-png.flaticon.com/512/4287/4287725.png", menu:'3' },
+    {id:"11114", name:'Restoran 4', location:[41.4517,31.7637], icon:"https://cdn-icons-png.flaticon.com/512/4287/4287725.png", menu:'4' }
 ];
 
 module.exports = class Restaurants{
