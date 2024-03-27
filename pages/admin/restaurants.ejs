@@ -1,0 +1,41 @@
+<% if(typeof action !== 'undefined' && action === 'edit'){ %>
+        <div class="alert alert-success">Restoran güncellendi</div>
+<% }  %>
+
+<% if(typeof action !== 'undefined' && action === 'delete'){ %>
+    <div class="alert alert-danger">Restoran silindi</div>
+<% }  %>
+
+<% if(restaurants.length > 0){ %>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Icon</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% restaurants.forEach(function(restaurant) { %>
+                <tr>
+                    <td>
+                        <img src=<%= restaurant.icon %> width="80">
+                    </td>
+                    <td><%= restaurant.name %></td>
+                    <td><%= restaurant.lat %> <%= restaurant.long %></td>
+                    <td>
+                        <a class="btn btn-primary btn-sm mr-2" href=`/admin/restaurants/${restaurant.id}`>Edit</a>
+                        <form action='/admin/delete-restaurant' method="post">
+                            <input type="hidden" name="restaurantid" value=`${restaurant.id}`>
+                            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                        </form>
+                    </td>
+
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <% } else { %>
+        <div class="alert alert-warning">Restoran bulunamadı.</div>
+    <% } %>

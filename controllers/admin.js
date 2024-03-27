@@ -1,13 +1,7 @@
-const Restaurants = require("../models/restaurants");
-
-exports.getDeneme = (req, res, next) => {
-    res.render('admin/deneme', {
-        path: '/admin/deneme'
-    });
-}
+const Restaurant = require('../models/restaurants');
 
 exports.getRestaurant = (req, res, next) => {
-    const restaurants = Restaurants.getAll();
+    const restaurants = Restaurant.getAll();
     res.render('admin/restaurants', {
         restaurants: restaurants,
         path: '/admin/restaurants',
@@ -24,10 +18,11 @@ exports.getAddRestaurant = (req, res, next) => {
 }
 
 exports.postAddRestaurant = (req, res, next) => {
-    const restaurant = new Restaurants();
+    const restaurant = new Restaurant();
 
     restaurant.name = req.body.name;
-    restaurant.location = req.body.location;
+    restaurant.lat = req.body.lat;
+    restaurant.long = req.body.long;
     restaurant.icon = req.body.icon;
     restaurant.menu = req.body.menu;
 
@@ -37,7 +32,7 @@ exports.postAddRestaurant = (req, res, next) => {
 
 exports.getEditRestaurant = (req, res, next) => {
 
-    const restaurant = Restaurants.getById(req.params.restaurantid);
+    const restaurant = Restaurant.getById(req.params.restaurantid);
 
     res.render('admin/edit-restaurant', {
         path: '/admin/add-restaurant',
@@ -48,10 +43,11 @@ exports.getEditRestaurant = (req, res, next) => {
 
 exports.postEditRestaurant = (req, res, next) => {
 
-    const restaurant = Restaurants.getById(req.body.id);
+    const restaurant = Restaurant.getById(req.body.id);
 
     restaurant.name = req.body.name;
-    restaurant.location = req.body.location;
+    restaurant.lat = req.body.lat;
+    restaurant.long = req.body.long;
     restaurant.icon = req.body.icon;
     restaurant.menu = req.body.menu;
 
@@ -59,7 +55,7 @@ exports.postEditRestaurant = (req, res, next) => {
     res.redirect('/admin/restaurants?action=edit');
 }
 
-exports.postDeleteProduct = (req, res, next) => {
+exports.postDeleteRestaurant = (req, res, next) => {
     Restaurants.DeleteById(req.body.id);
     res.redirect('/admin/restaurants?action=delete');
 }
