@@ -1,25 +1,29 @@
 const Restaurants = require("../models/restaurants");
 
-exports.getDeneme = (req,res,next)=>{
+exports.getDeneme = (req, res, next) => {
     res.render('admin/deneme', {
-        path:'/admin/deneme'});
-}
-
-exports.getRestaurant = (req,res,next)=>{
-    const restaurants = Restaurants.getAll();
-    res.render('admin/restaurants', {
-        restaurants:restaurants,
-        path:'/admin/restaurants',
-        action: req.query.action
+        path: '/admin/deneme'
     });
 }
 
-exports.getAddRestaurant = (req,res,next)=>{
-    res.render('admin/add-restaurant', {
-        path:'/admin/add-restaurant'});
+exports.getRestaurant = (req, res, next) => {
+    const restaurants = Restaurants.getAll();
+    res.render('admin/restaurants', {
+        restaurants: restaurants,
+        path: '/admin/restaurants',
+        action: req.query.action,
+        title: 'Kolaylokma - Restoranlar'
+    });
 }
 
-exports.postAddRestaurant = (req,res,next)=>{
+exports.getAddRestaurant = (req, res, next) => {
+    res.render('admin/add-restaurant', {
+        path: '/admin/add-restaurant',
+        title: 'Kolaylokma - Restoran Ekle'
+    });
+}
+
+exports.postAddRestaurant = (req, res, next) => {
     const restaurant = new Restaurants();
 
     restaurant.name = req.body.name;
@@ -31,17 +35,18 @@ exports.postAddRestaurant = (req,res,next)=>{
     res.redirect('/');
 }
 
-exports.getEditRestaurant = (req,res,next)=>{
+exports.getEditRestaurant = (req, res, next) => {
 
     const restaurant = Restaurants.getById(req.params.restaurantid);
 
     res.render('admin/edit-restaurant', {
-        path:'/admin/add-restaurant',
-        restaurant: restaurant
+        path: '/admin/add-restaurant',
+        restaurant: restaurant,
+        title: 'Kolaylokma - Restoran Düzenle'
     });
 }
 
-exports.postEditRestaurant = (req,res,next)=>{
+exports.postEditRestaurant = (req, res, next) => {
 
     const restaurant = Restaurants.getById(req.body.id);
 
@@ -54,7 +59,7 @@ exports.postEditRestaurant = (req,res,next)=>{
     res.redirect('/admin/restaurants?action=edit');
 }
 
-exports.postDeleteProduct = (req,res,next)=>{
+exports.postDeleteProduct = (req, res, next) => {
     Restaurants.DeleteById(req.body.id);
     res.redirect('/admin/restaurants?action=delete');
 }

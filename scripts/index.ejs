@@ -10,15 +10,12 @@
 
     var customIcon = L.icon({
         iconUrl: 'https://cdn-icons-png.flaticon.com/512/4287/4287725.png',
-        iconSize:     [40, 40], // size of the icon
-    });
-     
-    const restaurants = <%- restaurants %>
-    restaurants.forEach(function(restaurant) {
-    
-        var marker = L.marker((restaurant.location),{icon:customIcon}).addTo(map).bindPopup(restaurant.name).openPopup;
-
+        iconSize: [40, 40], // size of the icon
     });
 
-   /* var marker = L.marker([41.4507, 31.7627],{icon:customIcon}).addTo(map).bindPopup("Canım Zongi <3").openPopup  */
+    _data.restaurants.forEach(restaurant => {
+        var marker = L.marker(restaurant.location, {
+            icon: customIcon
+        }).addTo(map).bindPopup(restaurant.name).openPopup();
+    });
 </script>

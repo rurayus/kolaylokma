@@ -1,23 +1,39 @@
 const Restaurant = require('../models/restaurants')
 
-exports.getIndex = (req,res,next)=>{
-    const restaurants = Restaurant.getAll(); 
+exports.getIndex = (req, res, next) => {
+    const restaurants = Restaurant.getAll();
     res.render('users/index', {
-        restaurants:JSON.stringify(restaurants),
-        path:'/'});
+        restaurants: restaurants,
+        path: '/',
+        title: 'Kolaylokma - Ne yesek diye düşünme derdine son!'
+    });
 }
 
-exports.getAbout = (req,res,next)=>{
+exports.getAbout = (req, res, next) => {
     res.render('users/about', {
-        path:'/'});
+        path: '/',
+        title: 'Kolaylokma - Hakkımızda'
+    });
 }
 
-exports.getLogin = (req,res,next)=>{
+exports.getLogin = (req, res, next) => {
     res.render('account/login', {
-        path:'/'});
+        path: '/',
+        title: 'Kolaylokma - Giriş Yap'
+    });
 }
 
-exports.getRegister = (req,res,next)=>{
+exports.getRegister = (req, res, next) => {
     res.render('account/register', {
-        path:'/'});
+        path: '/',
+        title: 'Kolaylokma - Kayıt Ol'
+    });
+}
+
+exports.postLogin = (req, res, next) => {
+    res.redirect('/');
+}
+
+exports.postRegister = (req, res, next) => {
+    res.redirect('/');
 }

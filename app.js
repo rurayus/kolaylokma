@@ -1,5 +1,13 @@
+require("dotenv").config();
+// .env dosyasini uygulama genelinde kullanmak icin bu satiri ekledik
+// bundan sonra "process.env" ile .env dosyasindaki degiskenlere erisebiliriz
+// mesela "process.env.DB_HOST" ile .env dosyasindaki "DB_HOST" degerine erisebiliriz
+
 const express = require('express');
+const expressPartials = require('express-partials')
 const app = express();
+
+const db = require('./database/index');
 
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -12,18 +20,20 @@ const usersRoutes = require('./routes/users');
 
 const errorController = require('./controllers/error');
 
-app.use(express.static('public')); // Stil ve resim dosyalarına erişim için public klasörünü tanımladık
-app.use(bodyParser.urlencoded({extended:false}));
+const decorator = require('./middlewares/decorator');
 
-app.use('/admin',adminRoutes);
+app.use(express.static('public')); // Stil ve resim dosyalarına erişim için public klasörünü tanımladık
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use(expressPartials());
+app.use(decorator.function);
+
+app.use('/admin', adminRoutes);
 app.use(usersRoutes);
 
 app.use(errorController.get404Page);
 
-app.get('/login', function (req, res) {
-    res.render('account/login');
-})
-
-app.listen(1453,()=>{
+app.listen(1453, () => {
     console.log('Listening on port 1453');
 });
