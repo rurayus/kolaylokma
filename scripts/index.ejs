@@ -14,7 +14,7 @@
     });
 
     _data.restaurants.forEach(restaurant => {
-        var marker = L.marker(restaurant.location, {
+        var marker = L.marker([restaurant.lat, restaurant.long], {
             icon: customIcon
         }).addTo(map).bindPopup(restaurant.name).openPopup();
     });
