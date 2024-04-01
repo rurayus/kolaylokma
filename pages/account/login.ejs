@@ -4,12 +4,12 @@
 
         <div class="input-box">
             <input name="email" type="email" placeholder="Email" required>
-            <div id="_error" class="val_error"></div>
+            <div id="email-error" class="val_error"></div>
         </div>
 
         <div class="input-box">
             <input name="password" type="password" placeholder="Şifre" required>
-            <div id="password_error" class="val_error"></div>
+            <div id="password-error" class="val_error"></div>
         </div>
 
         <div class="remember-forgot">
@@ -23,7 +23,9 @@
             <p>Hesabın yok mu? <a style="font-size: 15px;" href="/register">Kayıt Ol</a></p>
         </div>
 
-    </form>
-</div>
+        <div id="server-error" style="color: red;"></div>
 
-<%- include('../../scripts/account/login.ejs') %>
+    </form>
+    <button id="error-button" style="display: none;">E-posta veya şifre hatalı!</button>
+
+    <%- include('../../scripts/account/login.ejs') %>

@@ -1,3 +1,41 @@
 <script>
-    // Login sayfasinin frontend javascript kodlari buraya gelecek
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.querySelector('form[name="vform"]');
+        var errorButton = document.getElementById('error-button');
+        var errorMessage = document.getElementById('server-error');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var formData = new FormData(form);
+            var object = {};
+            formData.forEach(function (value, key) {
+                object[key] = value;
+            });
+            var json = JSON.stringify(object);
+            console.log(json)
+
+            fetch('/login', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(json => {
+                    if (json.data === 'success') {
+                        errorButton.style.display = 'none';
+                        window.location.href = '/';
+                    } else if (json.error) {
+                        throw new Error(json.error);
+                    } else {
+                        throw new Error('Bilinmeyen bir hata oluştu');
+                    }
+                })
+                .catch(error => {
+                    errorMessage.textContent = error;
+                    errorMessage.style.color = 'red';
+                    errorMessage.style.display = 'block';
+                });
+        });
+    });
+
 </script>
