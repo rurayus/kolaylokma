@@ -6,11 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
+<<<<<<< HEAD
     "db-create": "node database/create.js",
     "db-new-table": "npx sequelize migration:generate --name",
     "db-migrate": "npx sequelize db:migrate",
     "db-undo": "npx sequelize db:migrate:undo",
     "db-undo-all": "npx sequelize db:migrate:undo:all"
+=======
+    "db-create": "node database/create.js"
+>>>>>>> kuzey's
   },
   "author": "",
   "license": "ISC",
