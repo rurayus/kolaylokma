@@ -12,11 +12,11 @@ body {
 li,
 a,
 button {
-    font-family: 'Rubik';
-    font-weight: 700;
-    font-size: 20px;
-    color: #8a0c27;
-    text-decoration: none;
+    font-family: 'Rubik' ;
+    font-weight: 700 ;
+    font-size: 20px ;
+    color: #8a0c27 ;
+    text-decoration: none ;
 }
 
 header {

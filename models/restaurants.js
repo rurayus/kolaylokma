@@ -29,7 +29,7 @@ module.exports = class Restaurants {
     }
 
     static Update(restaurant) {
-        const index = restaurants.findIndex(i => i.id === id);
+        const index = restaurants.findIndex(i => i.id === restaurant.id);
         restaurants[index].name = restaurant.name;
         restaurants[index].lat = restaurant.lat;
         restaurants[index].long = restaurant.long
