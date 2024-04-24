@@ -1,4 +1,5 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <script>
     // Leaflet haritasını oluştur
     var map = L.map('map').setView([41.4507, 31.7627], 15);
@@ -18,4 +19,130 @@
             icon: customIcon
         }).addTo(map).bindPopup(restaurant.name).openPopup();
     });
+    
+    function showCheckboxesLocation() {
+    var checkboxes = document.getElementById("checkboxes-location");
+    var currentDisplayStyle = checkboxes.style.display;
+
+    if (currentDisplayStyle === "block") {
+        checkboxes.style.display = "none";
+    } else {
+        checkboxes.style.display = "block";
+      }
+    }
+
+    function showCheckboxesFood() {
+    var checkboxes = document.getElementById("checkboxes-food");
+    var currentDisplayStyle = checkboxes.style.display;
+
+    if (currentDisplayStyle === "block") {
+        checkboxes.style.display = "none";
+    } else {
+        checkboxes.style.display = "block";
+      }
+   }
+    function changeColor(button) {
+    button.classList.toggle("clicked");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+    let checkbox = document.querySelectorAll("#divOptions input");
+    let inputCheckbox = document.getElementById("inputCheckbox");
+
+    for (let i = 0; i < checkbox.length; i++) {
+        checkbox[i].addEventListener("change", (e) => {
+            if (e.target.checked == true) {
+                if (inputCheckbox.value == "") {
+                    inputCheckbox.value = checkbox[i].value;
+                    } 
+                    else {
+                    inputCheckbox.value += `,${checkbox[i].value}`;
+                    }
+                    } 
+                    else {
+                    let values = inputCheckbox.value.split(",");
+
+                    for (let r = 0; r < values.length; r++) {
+                        if (values[r] == e.target.value) {
+                            values.splice(r, 1);
+                        }
+                    }
+                        inputCheckbox.value = values;
+                    }
+                });
+            }
+        });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    let checkbox = document.querySelectorAll("#divOptions2 input");
+    let inputCheckbox = document.getElementById("inputCheckbox2");
+
+        for (let i = 0; i < checkbox.length; i++) {
+        checkbox[i].addEventListener("change", (e) => {
+            if (e.target.checked == true) {
+                if (inputCheckbox.value == "") {
+                    inputCheckbox.value = checkbox[i].value;
+                } 
+                else {
+                 inputCheckbox.value += `,${checkbox[i].value}`;
+                }
+            } 
+            else {
+             let values = inputCheckbox.value.split(",");
+
+                for (let r = 0; r < values.length; r++) {
+                    if (values[r] == e.target.value) {
+                        values.splice(r, 1);
+                    }
+                }
+                inputCheckbox.value = values;
+               }
+            });
+           }
+        } );
+
+       function showOptions(e) {
+        let divOptions = document.getElementById("divOptions");
+        if (divOptions.style.display == "none" || divOptions.style.display == "") {
+            divOptions.style.display = "inline-block";
+        } else {
+            divOptions.style.display = "none";
+        }
+    }
+    function clickMe(e) {
+        console.log('click me');
+        e.stopPropagation();
+    }
+    function hideOptions(e) {
+        let divOptions = document.getElementById("divOptions");
+
+        if (divOptions.contains(e.target)) {
+            divOptions.style.display = "inline-block";
+        } else {
+            divOptions.style.display = "none";
+        }
+    }
+    function showOptions2(e) {
+    let divOptions = document.getElementById("divOptions2");
+    if (divOptions.style.display == "none" || divOptions.style.display == "") {
+        divOptions.style.display = "inline-block";
+    } else {
+        divOptions.style.display = "none";
+    }
+    }
+
+    function clickMe(e) {
+    console.log('click me');
+    e.stopPropagation();
+   }
+
+    function hideOptions2(e) {
+    let divOptions = document.getElementById("divOptions2");
+
+    if (divOptions.contains(e.target)) {
+        divOptions.style.display = "inline-block";
+    } else {
+        divOptions.style.display = "none";
+    }
+}
 </script>
