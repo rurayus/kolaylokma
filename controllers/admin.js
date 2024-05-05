@@ -35,7 +35,7 @@ exports.getEditRestaurant = (req, res, next) => {
     const restaurant = Restaurant.getById(req.params.restaurantid);
 
     res.render('admin/edit-restaurant', {
-        path: '/admin/add-restaurant',
+        path: '/admin/restaurants',
         restaurant: restaurant,
         title: 'Kolaylokma - Restoran Düzenle'
     });
@@ -43,6 +43,8 @@ exports.getEditRestaurant = (req, res, next) => {
 
 exports.postEditRestaurant = (req, res, next) => {
 
+    console.log(req.body)
+    
     const restaurant = Restaurant.getById(req.body.id);
 
     restaurant.name = req.body.name;
@@ -51,11 +53,11 @@ exports.postEditRestaurant = (req, res, next) => {
     restaurant.icon = req.body.icon;
     restaurant.menu = req.body.menu;
 
-    restaurant.Update(restaurant);
+    Restaurant.Update(restaurant);
     res.redirect('/admin/restaurants?action=edit');
 }
 
 exports.postDeleteRestaurant = (req, res, next) => {
-    Restaurants.DeleteById(req.body.id);
+    Restaurant.DeleteById(req.body.restaurantid);
     res.redirect('/admin/restaurants?action=delete');
 }
