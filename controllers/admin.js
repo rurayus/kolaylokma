@@ -2,6 +2,7 @@ const Restaurant = require('../models/restaurants');
 const MenuItem = require('../models/menu');
 
 
+
 exports.getRestaurant = (req, res, next) => {
     const restaurants = Restaurant.getAll();
     res.render('admin/restaurants', {
