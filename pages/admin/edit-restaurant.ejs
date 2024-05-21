@@ -1,0 +1,44 @@
+<form action="/admin/restaurants" method="post">
+    <input type="hidden" name="id" value="<%= _data.restaurant.id %>">
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+            <input class="form-control#name" type="text" name="name" value="<%= _data.restaurant.name %>">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="lat" class="col-sm-2 col-form-label">Lat</label>
+        <div class="col-sm-10">
+            <input class="form-control#lat" type="text" name="lat" value="<%= _data.restaurant.lat %>">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="long" class="col-sm-2 col-form-label">Long</label>
+        <div class="col-sm-10">
+            <input class="form-control#long" type="text" name="long" value="<%= _data.restaurant.long %>">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="icon" class="col-sm-2 col-form-label">Icon</label>
+        <div class="col-sm-10">
+            <input class="form-control#icon" type="text" name="icon" value="<%= _data.restaurant.icon %>">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="menu" class="col-sm-2 col-form-label">Menu</label>
+        <div class="col-sm-10">
+            <input class="form-control#menu" type="text" name="menu" value="<%= _data.restaurant.menu %>">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-10 offset-sm-2">
+            <input class="btn btn-primary" type="submit" value="Save Restaurant">
+        </div>
+    </div>
+
+</form>
