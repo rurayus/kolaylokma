@@ -15,13 +15,28 @@ exports.getIndex = (req, res, next) => {
 }
 
 exports.getMenus = (req, res, next) => {
-    console.log(req.cookies.userdata);
 
     const restaurants = Restaurant.getAll();
     const menuItems = MenuItems.getAll();
+
+    const restaurantMap = {};
+        restaurants.forEach(restaurant => {
+            restaurantMap[restaurant.id] = restaurant.name;
+    });
+
+    const menuItemsWithRestaurantNames = menuItems.map(menuItem => {
+        const restaurantId = menuItem.restaurant_id;
+        const restaurantName = restaurantMap[restaurantId];
+
+        return {
+            ...menuItem,
+            restaurant_name: restaurantName
+        };
+    });
+
     res.render('users/menus', {
         restaurants: restaurants,
-        menuItems: menuItems,
+        menuItems: menuItemsWithRestaurantNames,
         path: '/',
         title: 'Kolaylokma - Ne yesek diye düşünme derdine son!'
 
