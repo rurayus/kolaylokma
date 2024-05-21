@@ -1,39 +1,38 @@
 <% if(typeof action !=='undefined' && action==='edit' ){ %>
-    <div class="alert alert-success">Restoran güncellendi</div>
+    <div class="alert alert-success">Menü Öğesi güncellendi</div>
     <% } %>
 
         <% if(typeof action !=='undefined' && action==='delete' ){ %>
-            <div class="alert alert-danger">Restoran silindi</div>
+            <div class="alert alert-danger">Menü Öğesi silindi</div>
             <% } %>
 
-                <% if(_data.restaurants.length> 0){ %>
+                <% if(_data.menuItems.length> 0){ %>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>    </th>
+                                <th>Restaurant Id</th>
                                 <th>Name</th>
-                                <th>Location</th>
+                                <th>Price</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <% _data.restaurants.forEach(function(restaurant) { %>
+                            <% _data.menuItems.forEach(function(menuItems) { %>
                                 <tr>
                                     <td>
-                                        <img src='https://i.hizliresim.com/atzdie4.png' width="80">
+                                        <%= menuItems.restaurant_id %>
                                     </td>
                                     <td>
-                                        <%= restaurant.name %>
+                                        <%= menuItems.item_name %>
                                     </td>
                                     <td>
-                                        <%= restaurant.lat %>
-                                            <%= restaurant.long %>
+                                        <%= menuItems.item_price %> TL
                                     </td>
                                     <td>
                                         <a class="btn btn-primary btn-sm mr-2"
-                                            href="/admin/restaurants/<%= restaurant.id %>">Edit</a>
-                                        <form action='/admin/delete-restaurant' method="post">
-                                            <input type="hidden" name="restaurantid" value="<%= restaurant.id %>">
+                                            href="/admin/menus/<%= menuItems.id %>">Edit</a>
+                                        <form action='/admin/delete-menu' method="post">
+                                            <input type="hidden" name="menuItemsid" value="<%= menuItems.id %>">
                                             <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                                         </form>
                                     </td>
@@ -43,5 +42,5 @@
                         </tbody>
                     </table>
                     <% } else { %>
-                        <div class="alert alert-warning">Restoran bulunamadı.</div>
+                        <div class="alert alert-warning">Menü öğesi bulunamadı.</div>
                         <% } %>

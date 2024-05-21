@@ -1,4 +1,5 @@
 const Restaurant = require('../models/restaurants');
+const MenuItems = require('../models/menu');
 const User = require('../models/user');
 
 exports.getIndex = (req, res, next) => {
@@ -7,6 +8,20 @@ exports.getIndex = (req, res, next) => {
     const restaurants = Restaurant.getAll();
     res.render('users/index', {
         restaurants: restaurants,
+        path: '/',
+        title: 'Kolaylokma - Ne yesek diye düşünme derdine son!'
+
+    });
+}
+
+exports.getMenus = (req, res, next) => {
+    console.log(req.cookies.userdata);
+
+    const restaurants = Restaurant.getAll();
+    const menuItems = MenuItems.getAll();
+    res.render('users/menus', {
+        restaurants: restaurants,
+        menuItems: menuItems,
         path: '/',
         title: 'Kolaylokma - Ne yesek diye düşünme derdine son!'
 

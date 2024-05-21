@@ -10,4 +10,11 @@ router.get('/restaurants/:restaurantid',adminController.getEditRestaurant);
 router.post('/restaurants',adminController.postEditRestaurant);
 router.post('/delete-restaurant',adminController.postDeleteRestaurant);
 
+router.get('/menus',adminController.getMenuItems);
+router.get('/add-menu',adminController.getAddMenuItems);
+router.post('/add-menu',adminController.postAddMenuItems);
+router.get('/menus/:menuid',adminController.getEditMenuItems);
+router.post('/menus',adminController.postEditMenuItems);
+router.post('/delete-menu',adminController.postDeleteMenuItems);
+
 module.exports = router;

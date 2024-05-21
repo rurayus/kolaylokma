@@ -1,0 +1,30 @@
+<% if(_data.menuItems.length> 0){ %>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Restaurant Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% _data.menuItems.forEach(function(menuItems) { %>
+                <tr>
+                    <td>
+                        <%= menuItems.restaurant_id %>
+                    </td>
+                    <td>
+                        <%= menuItems.item_name %>
+                    </td>
+                    <td>
+                        <%= menuItems.item_price %> TL
+                    </td>
+                    
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+    <% } else { %>
+        <div class="alert alert-warning">Menü öğesi bulunamadı.</div>
+        <% } %>
