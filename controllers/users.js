@@ -1,5 +1,5 @@
 const Restaurant = require('../models/restaurants');
-const MenuItems = require('../models/menu');
+const MenuItems = require('../models/menuItem');
 const User = require('../models/user');
 
 exports.getIndex = (req, res, next) => {

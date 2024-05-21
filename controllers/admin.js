@@ -1,5 +1,5 @@
 const Restaurant = require('../models/restaurants');
-const MenuItem = require('../models/menu');
+const MenuItem = require('../models/menuItem');
 
 
 exports.getRestaurant = (req, res, next) => {
