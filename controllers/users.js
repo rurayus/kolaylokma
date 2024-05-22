@@ -2,10 +2,11 @@ const Restaurant = require('../models/restaurants');
 const MenuItems = require('../models/menu');
 const User = require('../models/user');
 
-exports.getIndex = (req, res, next) => {
+exports.getIndex = async (req, res, next) => {
     console.log(req.cookies.userdata);
 
-    const restaurants = Restaurant.getAll();
+    const restaurants = await Restaurant.findAll({raw: true})
+    console.log(restaurants)
     res.render('users/index', {
         restaurants: restaurants,
         path: '/',
@@ -14,9 +15,9 @@ exports.getIndex = (req, res, next) => {
     });
 }
 
-exports.getMenus = (req, res, next) => {
+exports.getMenus = async (req, res, next) => {
 
-    const restaurants = Restaurant.getAll();
+    const restaurants = await Restaurant.findAll({raw: true});
     const menuItems = MenuItems.getAll();
 
     const restaurantMap = {};

@@ -3,8 +3,8 @@ const MenuItem = require('../models/menu');
 
 
 
-exports.getRestaurant = (req, res, next) => {
-    const restaurants = Restaurant.getAll();
+exports.getRestaurant = async (req, res, next) => {
+    const restaurants = await Restaurant.findAll({raw: true});
     res.render('admin/restaurants', {
         restaurants: restaurants,
         path: '/admin/restaurants',
