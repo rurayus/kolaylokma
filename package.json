@@ -9,6 +9,8 @@
     "db-create": "node database/create.js",
     "db-new-table": "npx sequelize migration:generate --name",
     "db-migrate": "npx sequelize db:migrate",
+    "db-seed": "npx sequelize db:seed:all",
+    "db-new-seed": "npx sequelize seed:generate --name",
     "db-undo": "npx sequelize db:migrate:undo",
     "db-undo-all": "npx sequelize db:migrate:undo:all"
   },
