@@ -68,7 +68,7 @@ const Restaurant = db.define('Restaurant',
           menu: {
             type: Sequelize.INTEGER,
             allowNull: false,
-            unique: false
+            unique: true
           }
     },
     {

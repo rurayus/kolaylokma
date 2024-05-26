@@ -9,16 +9,19 @@
             </tr>
         </thead>
         <tbody>
-            <% _data.menuItems.forEach(function(menuItems) { %>
+            <% _data.MenuItems.forEach(function(menuItems) { %>
                 <tr>
                     <td>
-                        <%= menuItems.restaurant_name %>
+                        <%= MenuItems.name %>
                     </td>
                     <td>
-                        <%= menuItems.item_name %>
+                        <%= MenuItems.price %>
                     </td>
                     <td>
-                        <%= menuItems.item_price %> TL
+                        <%= MenuItems.kategori %> TL
+                    </td>
+                    <td>
+                        <%= MenuItems.menu %> TL
                     </td>
                     
                 </tr>

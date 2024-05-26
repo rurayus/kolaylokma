@@ -1,5 +1,5 @@
 const Restaurant = require('../models/restaurants');
-const MenuItem = require('../models/menu');
+const MenuItems = require('../models/menuItem');
 
 
 
@@ -63,8 +63,9 @@ exports.postDeleteRestaurant = (req, res, next) => {
     res.redirect('/admin/restaurants?action=delete');
 }
 
-exports.getMenuItems = (req, res, next) => {
-    const menuItems = MenuItem.getAll();
+exports.getMenuItems = async (req, res, next) => {
+    // const menuItems = MenuItem.getAll(); 
+    const MenuItems = await MenuItems.findAll({raw: true});
     res.render('admin/menus', {
         menuItems: menuItems,
         path: '/admin/menus',
@@ -81,7 +82,7 @@ exports.getAddMenuItems = (req, res, next) => {
 }
 
 exports.postAddMenuItems = (req, res, next) => {
-    const menuItem = new MenuItem();
+    const menuItem = new menu-items();
 
     menuItem.restaurant_id = req.body.restaurant_id;
     menuItem.item_name = req.body.item_name;
@@ -93,7 +94,7 @@ exports.postAddMenuItems = (req, res, next) => {
 
 exports.getEditMenuItems = (req, res, next) => {
 
-    const menuItem = MenuItem.getById(req.params.menuItemsid);
+    const menuItem = MenuItems.getById(req.params.menuItemsid);
 
     res.render('admin/edit-menu', {
         path: '/admin/menus',
@@ -106,17 +107,17 @@ exports.postEditMenuItems = (req, res, next) => {
 
     console.log(req.body)
     
-    const menuItem = MenuItem.getById(req.body.id);
+    const menuItem = MenuItems.getById(req.body.id);
 
     menuItem.restaurant_id = req.body.restaurant_id;
     menuItem.item_name = req.body.item_name;
     menuItem.item_price = req.body.item_price;
 
-    MenuItem.Update(menuItem);
+    MenuItems.Update(menuItem);
     res.redirect('/admin/menus?action=edit');
 }
 
 exports.postDeleteMenuItems = (req, res, next) => {
-    MenuItem.DeleteById(req.body.menuItemsid);
+    MenuItems.DeleteById(req.body.menuItemsid);
     res.redirect('/admin/menus?action=delete');
 }

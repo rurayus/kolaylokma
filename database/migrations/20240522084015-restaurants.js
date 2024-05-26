@@ -25,7 +25,7 @@ module.exports = {
       menu: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        unique: false
+        unique: true
       }
     });
   },

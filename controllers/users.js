@@ -1,14 +1,17 @@
 const Restaurant = require('../models/restaurants');
-const MenuItems = require('../models/menu');
+const MenuItems = require('../models/menuItem');
 const User = require('../models/user');
 
 exports.getIndex = async (req, res, next) => {
     console.log(req.cookies.userdata);
 
-    const restaurants = await Restaurant.findAll({raw: true})
+    const restaurants = await Restaurant.findAll({raw: true});
+    const menuItems = await MenuItems.findAll({raw: true});
+    
     console.log(restaurants)
     res.render('users/index', {
         restaurants: restaurants,
+        menuItems: menuItems,
         path: '/',
         title: 'Kolaylokma - Ne yesek diye düşünme derdine son!'
 
@@ -18,7 +21,8 @@ exports.getIndex = async (req, res, next) => {
 exports.getMenus = async (req, res, next) => {
 
     const restaurants = await Restaurant.findAll({raw: true});
-    const menuItems = MenuItems.getAll();
+    //const menuItems = MenuItems.getAll();
+    const menuItems = await MenuItems.findAll({raw: true});
 
     const restaurantMap = {};
         restaurants.forEach(restaurant => {
