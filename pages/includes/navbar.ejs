@@ -5,9 +5,13 @@
             <% if(_data.userdata !=undefined) { %>
             <!-- Oturum açılmış kullanıcı varsa -->
             <li class="birinci" style="display: flex; align-items: center;">
-                <a style="color: rgb(100, 100, 100); font-weight: 500; font-size: 1rem; margin-right: 0.4rem">
-                    <%= _data.userdata %>&nbsp;-
+                <a style="color: rgb(100, 100, 100); font-weight: 500; font-size: 1rem; margin-right: 1.5rem">
+                    <%= _data.userdata %>
                 </a>
+                <% if (role === 'admin') { %>
+                <a class="cta" href="/admin/restaurants" style="margin-right: 1.5rem;">
+                    Admin Paneli</a>
+                <% } %>
                 <a href="/logout">Çıkış Yap</a>
             </li>
             <% } else { %>
