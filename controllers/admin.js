@@ -1,8 +1,15 @@
 const Restaurant = require('../models/restaurants');
 const MenuItems = require('../models/menuItem');
+const User = require('../models/user');
 const { MAHALLELER, KATEGORILER } = require('../constants');
 
 exports.getRestaurant = async (req, res, next) => {
+    if (!req.userRecord) {
+        return res.redirect('/login');
+    } else if (req.userRecord.role != 'admin') {
+        return res.redirect('/');
+    }
+
     const restaurants = await Restaurant.findAll({ raw: true });
     res.render('admin/restaurants', {
         restaurants: restaurants,
@@ -12,7 +19,13 @@ exports.getRestaurant = async (req, res, next) => {
     });
 }
 
-exports.getAddRestaurant = (req, res, next) => {
+exports.getAddRestaurant = async (req, res, next) => {
+    if (!req.userRecord) {
+        return res.redirect('/login');
+    } else if (req.userRecord.role != 'admin') {
+        return res.redirect('/');
+    }
+
     res.render('admin/add-restaurant', {
         mahalleler: MAHALLELER,
         path: '/admin/add-restaurant',
@@ -21,6 +34,12 @@ exports.getAddRestaurant = (req, res, next) => {
 }
 
 exports.postAddRestaurant = async (req, res, next) => {
+    if (!req.userRecord) {
+        return res.redirect('/login');
+    } else if (req.userRecord.role != 'admin') {
+        return res.redirect('/');
+    }
+
     let puan = Math.random() * 5;
     const restaurant = {
         name: req.body.name,
@@ -36,6 +55,11 @@ exports.postAddRestaurant = async (req, res, next) => {
 }
 
 exports.getEditRestaurant = async (req, res, next) => {
+    if (!req.userRecord) {
+        return res.redirect('/login');
+    } else if (req.userRecord.role != 'admin') {
+        return res.redirect('/');
+    }
 
     const restaurant = await Restaurant.findOne({ where: { id: req.params.restaurantid }, raw: true });
     if (!restaurant) {
@@ -50,6 +74,11 @@ exports.getEditRestaurant = async (req, res, next) => {
 }
 
 exports.postEditRestaurant = async (req, res, next) => {
+    if (!req.userRecord) {
+        return res.redirect('/login');
+    } else if (req.userRecord.role != 'admin') {
+        return res.redirect('/');
+    }
 
     const restaurant = await Restaurant.findOne({ where: { id: req.body.id }, raw: true });
 
@@ -64,11 +93,23 @@ exports.postEditRestaurant = async (req, res, next) => {
 }
 
 exports.postDeleteRestaurant = async (req, res, next) => {
+    if (!req.userRecord) {
+        return res.redirect('/login');
+    } else if (req.userRecord.role != 'admin') {
+        return res.redirect('/');
+    }
+
     await Restaurant.destroy({ where: { id: req.body.restaurantid } });
     res.redirect('/admin/restaurants?action=delete');
 }
 
 exports.getMenuItems = async (req, res, next) => {
+    if (!req.userRecord) {
+        return res.redirect('/login');
+    } else if (req.userRecord.role != 'admin') {
+        return res.redirect('/');
+    }
+
     const restaurant = await Restaurant.findOne({ where: { id: req.params.restaurantid }, raw: true });
     if (!restaurant) {
         return res.redirect('/admin/restaurants');
@@ -89,6 +130,12 @@ exports.getMenuItems = async (req, res, next) => {
 }
 
 exports.getAddMenuItems = async (req, res, next) => {
+    if (!req.userRecord) {
+        return res.redirect('/login');
+    } else if (req.userRecord.role != 'admin') {
+        return res.redirect('/');
+    }
+
     var restaurants;
     if (req.params.restaurantid == undefined) {
         restaurants = await Restaurant.findAll({ raw: true });
@@ -113,6 +160,12 @@ exports.getAddMenuItems = async (req, res, next) => {
 }
 
 exports.postAddMenuItems = async (req, res, next) => {
+    if (!req.userRecord) {
+        return res.redirect('/login');
+    } else if (req.userRecord.role != 'admin') {
+        return res.redirect('/');
+    }
+
     const menuItem = {
         restaurantId: req.body.restaurantid,
         name: req.body.name,
@@ -126,6 +179,12 @@ exports.postAddMenuItems = async (req, res, next) => {
 }
 
 exports.getEditMenuItems = async (req, res, next) => {
+    if (!req.userRecord) {
+        return res.redirect('/login');
+    } else if (req.userRecord.role != 'admin') {
+        return res.redirect('/');
+    }
+
     const menuItem = await MenuItems.findOne({ where: { id: req.params.menuid }, raw: true });
     const restaurants = await Restaurant.findAll({ raw: true });
 
@@ -139,6 +198,12 @@ exports.getEditMenuItems = async (req, res, next) => {
 }
 
 exports.postEditMenuItems = async (req, res, next) => {
+    if (!req.userRecord) {
+        return res.redirect('/login');
+    } else if (req.userRecord.role != 'admin') {
+        return res.redirect('/');
+    }
+
     const menuItem = await MenuItems.findOne({ where: { id: req.body.menuid }, raw: true });
 
     menuItem.name = req.body.name;
@@ -151,6 +216,12 @@ exports.postEditMenuItems = async (req, res, next) => {
 }
 
 exports.postDeleteMenuItems = async (req, res, next) => {
+    if (!req.userRecord) {
+        return res.redirect('/login');
+    } else if (req.userRecord.role != 'admin') {
+        return res.redirect('/');
+    }
+
     await MenuItems.destroy({ where: { id: req.body.menuid } });
     res.redirect('/admin/restaurants/' + req.body.restid + '/menu?action=delete');
 }

@@ -6,13 +6,11 @@ const Sequelize = require('sequelize');
 const SABIT = require('../constants');
 
 exports.getIndex = async (req, res, next) => {
-    console.log(req.cookies.userdata);
+    console.log(req.userRecord);
 
     const restaurants = await Restaurant.findAll({ raw: true });
     const menuItems = await MenuItems.findAll({ raw: true });
 
-    console.log(restaurants)
-    console.log(menuItems)
     res.render('users/index', {
         restaurants: restaurants,
         menuItems: menuItems,
