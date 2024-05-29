@@ -2,98 +2,78 @@
     <div class="container">
         <div id="map" style="width: 600px; height: 500px"></div>
     </div>
-<div class="container1">
-        
-    <div class="filter-wrapper">
-        <form id="filter-form" action="/menus" method="get">
-        <div class="custom-combobox-container">
-            <div class="custom-combobox" onclick="showOptions(this)">
-                <input  type="text" id="inputCheckbox" readonly placeholder="Konum Seçiniz">
-                <box-icon name='chevron-down'></box-icon>
-            </div>
-            <div class="options-container" id="divOptions" onmouseleave="hideOptions(this)">
-                <label for="yesilmahalle"><input type="checkbox" id="yesilmahalle" name="yesilmahalle" value="yesilmahalle"> Yeşil Mahalle Mah.</label>
-                <label for="yenimahalle"><input type="checkbox" id="yenimahalle" name="yenimahalle" value="yenimahalle"> Yeni Mahalle</label>
-                <label for="terekki"><input type="checkbox" id="terekki" name="terekki" value="terekki"> Terekki</label>
-                <label for="tepebasi"><input type="checkbox" id="tepebasi" name="tepebasi" value="tepebasi"> Tepebaşı Mah.</label>
-                <label for="ontemmuz"><input type="checkbox" id="ontemmuz" name="ontemmuz" value="ontemmuz"> On Temmuz Mah.</label>
-                <label for="mithatpasa"><input type="checkbox" id="mithatpasa" name="mithatpasa" value="mithatpasa"> Mithatpaşa Mah.</label>
-                <label for="mesrutiyet"><input type="checkbox" id="mesrutiyet" name="mesrutiyet" value="mesrutiyet"> Meşrutiyet Mah.</label>
-                <label for="karaelmas"><input type="checkbox" id="karaelmas" name="karaelmas" value="karaelmas"> Karaelmas Mah.</label>
-                <label for="incivez"><input type="checkbox" id="incivez" name="incivez" value="incivez"> İncivez Mah.</label>
-                <label for="inagzi"><input type="checkbox" id="inagzi" name="inagzi" value="inagzi"> İnağzı Mah.</label>
-                <label for="dilaver"><input type="checkbox" id="dilaver" name="dilaver" value="dilaver"> Dilaver Mah.</label>
-                <label for="cinartepe"><input type="checkbox" id="cinartepe" name="cinartepe" value="cinartepe"> Çınartepe</label>
-                <label for="caydamar"><input type="checkbox" id="caydamar" name="caydamar" value="caydamar"> Çaydamar</label>
-                <label for="bastarla"><input type="checkbox" id="bastarla" name="bastarla" value="bastarla"> Baştarla</label>
-                <label for="birlik"><input type="checkbox" id="birlik" name="birlik" value="birlik"> Birlik</label>
-                <label for="baglik"><input type="checkbox" id="baglik" name="baglik" value="baglik"> Bağlık</label>
-                <label for="bahcelievler"><input type="checkbox" id="bahcelievler" name="bahcelievler" value="bahcelievler"> Bahçelievler</label>
-                <label for="asma"><input type="checkbox" id="asma" name="asma" value="asma"> Asma</label>
-            </div>
-        </div>
-        <br><br>
-
-        <div>
-            <h3>Fiyat Aralığı</h3>
-            <br>
-            <div class="input-box">
-            <input type="number" id="minFiyat" name="minFiyat" placeholder="Min.">
-            <span>TL</span>
-            <span style="margin-left: 5px; padding-right: 5px;">-</span>
-            <input type="number" id="maxFiyat" name="maxFiyat" placeholder="Maks.">
-            <span>TL</span>
-        </div>
-        </div>
-        <br><br>
-            <div class="custom-combobox-container">
-                <div class="custom-combobox" onclick="showOptions2(this)">
-                    <input type="text" id="inputCheckbox2" readonly placeholder="Ne Yemek İstersiniz?">
-                    <box-icon name='chevron-down'></box-icon>
+    <div class="container1">
+        <div class="filter-wrapper">
+            <form id="filter-form" action="/menus" method="get" autocomplete="off">
+                <div class="custom-combobox-container">
+                    <div class="custom-combobox" onclick="showOptions(this)">
+                        <input type="text" id="inputCheckbox" name="mahalleler" readonly placeholder="Konum Seçiniz">
+                        <box-icon name='chevron-down'></box-icon>
+                    </div>
+                    <div class="options-container" id="divOptions" onmouseleave="hideOptions(this)">
+                        <% for (let i=0; i < _data.mahalleler.length; i++) { %>
+                        <label for="<%= _data.mahalleler[i] %>"><input type="checkbox" id="<%= _data.mahalleler[i] %>" value="<%= _data.mahalleler[i] %>">
+                            <%= _data.mahalleler[i] %> Mah.
+                        </label>
+                        <% } %>
+                    </div>
                 </div>
-                <div class="options-container" id="divOptions2" onmouseleave="hideOptions2(this)">
-                    <label for="denizurunleri"><input type="checkbox" id="denizurunleri" name="denizurunleri" value="denizurunleri"> Deniz Ürünleri</label>
-                    <label for="pastaneurunleri"><input type="checkbox" id="pastaneurunleri" name="pastaneurunleri" value="pastaneurunleri"> Pastane Ürünleri</label>
-                    <label for="burger"><input type="checkbox" id="burger" name="burger" value="burger"> Burger</label>
-                    <label for="salata"><input type="checkbox" id="salata" name="salata" value="salata"> Salata</label>
-                    <label for="döner"><input type="checkbox" id="döner" name="döner" value="döner"> Döner</label>
-                    <label for="tavuk"><input type="checkbox" id="tavuk" name="tavuk" value="tavuk"> Tavuk</label>
-                    <label for="dunyamutfagi"><input type="checkbox" id="dunyamutfagi" name="dunyamutfagi" value="dunyamutfagi"> Dünya Mutfağı</label>
-                    <label for="tatli"><input type="checkbox" id="tatli" name="tatli" value="tatli"> Tatlı</label>
-                    <label for="vejetaryen"><input type="checkbox" id="vejetaryen" name="vejetaryen" value="vejetaryen"> Vejetaryen</label>
-                    <label for="kebap"><input type="checkbox" id="kebap" name="kebap" value="kebap"> Kebap</label>
-                    <label for="kahvalti"><input type="checkbox" id="kahvalti" name="kahvalti" value="kahvalti"> Kahvaltı</label>
-                    <label for="evyemegi"><input type="checkbox" id="evyemegi" name="evyemegi" value="evyemegi"> Ev Yemeği</label>
-                    <label for="pizza"><input type="checkbox" id="pizza" name="pizza" value="pizza"> Pizza</label>
-                    <label for="köfte"><input type="checkbox" id="köfte" name="köfte" value="köfte"> Köfte</label>
+                <br><br>
+
+                <div>
+                    <h3>Fiyat Aralığı</h3>
+                    <br>
+                    <div class="input-box" style="display: flex; justify-content: space-between; align-items: center; gap: 5px;">
+                        <input type="number" id="minFiyat" name="minFiyat" placeholder="Min.">
+                        <span>TL</span>
+                        <span style="margin-left: 5px; padding-right: 5px;">-</span>
+                        <input type="number" id="maxFiyat" name="maxFiyat" placeholder="Maks.">
+                        <span>TL</span>
+                    </div>
                 </div>
-            </div>
-        
-    <br><br>
+                <br><br>
+                <div class="custom-combobox-container">
+                    <div class="custom-combobox" onclick="showOptions2(this)">
+                        <input type="text" id="inputCheckbox2" readonly placeholder="Ne Yemek İstersiniz?" name="kategoriler">
+                        <box-icon name='chevron-down'></box-icon>
+                    </div>
+                    <div class="options-container" id="divOptions2" onmouseleave="hideOptions2(this)">
+                        <% for (let i=0; i < _data.kategoriler.length; i++) { %>
+                        <label for="<%= _data.kategoriler[i] %>"><input type="checkbox" id="<%= _data.kategoriler[i] %>" value="<%= _data.kategoriler[i] %>">
+                            <%= _data.kategoriler[i] %>
+                        </label>
+                        <% } %>
+                    </div>
+                </div>
 
-        <div>
-            <h3>Restoran Puanı</h3> <br>
-            <div style="display: inline; padding-right: 5px;"><input type="checkbox" id="puan1" name="puan" value="1"> 1+ </div> 
-            <div style="display: inline; padding: 5px;"><input type="checkbox" id="puan2" name="puan" value="2"> 2+ </div> 
-            <div style="display: inline; padding: 5px;"><input type="checkbox" id="puan3" name="puan" value="3"> 3+ </div> 
-            <div style="display: inline; padding: 5px;"><input type="checkbox" id="puan4" name="puan" value="4"> 4+ </div>
-            <div style="display: inline; padding: 5px;"><input type="checkbox" id="puan5" name="puan" value="5"> 5+ </div>
+                <br><br>
+
+                <div>
+                    <h3>Restoran Puanı</h3> <br>
+                    <div style="display: inline; padding-right: 5px;"><input type="radio" id="puan" name="puan" value="1"> 1+ </div>
+                    <div style="display: inline; padding: 5px;"><input type="radio" id="puan" name="puan" value="2">
+                        2+ </div>
+                    <div style="display: inline; padding: 5px;"><input type="radio" id="puan" name="puan" value="3">
+                        3+ </div>
+                    <div style="display: inline; padding: 5px;"><input type="radio" id="puan" name="puan" value="4">
+                        4+ </div>
+                    <div style="display: inline; padding: 5px;"><input type="radio" id="puan" name="puan" value="5">
+                        5+ </div>
+                </div>
+                <br>
+
+                <div>
+                    <h3>Sıralama</h3> <br>
+                    <div style="padding-right: 5px; display: inline;"><input type="radio" id="sirala1" name="sirala" value="dusukfiyat"> En Düşük Fiyat </div>
+                    <div style="padding-right: 5px; display: inline;"><input type="radio" id="sirala2" name="sirala" value="yuksekfiyat"> En Yüksek Fiyat </div>
+                </div>
+                <br>
+
+                <div class="button">
+                    <button class="filter-button" type="submit" onclick="submitFilters()">Menüleri Göster</button>
+                </div>
+
+            </form>
         </div>
-        <br>
-
-        <div>
-            <h3>Sıralama</h3> <br>
-            <div style="padding-right: 5px; display: inline;"><input type="radio" id="sirala1" name="sirala" value="dusukfiyat"> En Düşük Fiyat </div>
-            <div style="padding-right: 5px; display: inline;"><input type="radio" id="sirala2" name="sirala" value="yuksekfiyat"> En Yüksek Fiyat </div>
-        </div>
-        <br>
-
-        <div class="button">
-            <button class="filter-button" type="submit" onclick="submitFilters()">Menüleri Göster</button>
-        </div>
-        
-    </form>
-</div>
-</div>
-<%- include('../../scripts/index.ejs'); %>
-
+    </div>
+    <%- include('../../scripts/index.ejs'); %>

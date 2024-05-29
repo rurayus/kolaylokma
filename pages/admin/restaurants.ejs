@@ -1,47 +1,82 @@
-<% if(typeof action !=='undefined' && action==='edit' ){ %>
-    <div class="alert alert-success">Restoran güncellendi</div>
+<div class="restaurants">
+    <% if(typeof _data.action !=='undefined' && _data.action==='edit' ){ %>
+    <div class="alert alert-success"><i class='bx bx-info-circle'></i>Restorant güncellendi</div>
     <% } %>
 
-        <% if(typeof action !=='undefined' && action==='delete' ){ %>
-            <div class="alert alert-danger">Restoran silindi</div>
-            <% } %>
+    <% if(typeof _data.action !=='undefined' && _data.action==='add' ){ %>
+    <div class="alert alert-success"><i class='bx bx-info-circle'></i>Restorant eklendi</div>
+    <% } %>
 
-                <% if(_data.restaurants.length> 0){ %>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>    </th>
-                                <th>Name</th>
-                                <th>Location</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% _data.restaurants.forEach(function(restaurant) { %>
-                                <tr>
-                                    <td>
-                                        <img src='https://i.hizliresim.com/atzdie4.png' width="80">
-                                    </td>
-                                    <td>
-                                        <%= restaurant.name %>
-                                    </td>
-                                    <td>
-                                        <%= restaurant.lat %>
-                                            <%= restaurant.long %>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-primary btn-sm mr-2"
-                                            href="/admin/restaurants/<%= restaurant.id %>">Edit</a>
-                                        <form action='/admin/delete-restaurant' method="post">
-                                            <input type="hidden" name="restaurantid" value="<%= restaurant.id %>">
-                                            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-                                        </form>
-                                    </td>
+    <% if(typeof _data.action !=='undefined' && _data.action==='delete' ){ %>
+    <div class="alert alert-danger"><i class='bx bx-info-circle'></i>Restorant silindi</div>
+    <% } %>
 
-                                </tr>
-                                <% }); %>
-                        </tbody>
-                    </table>
+    <% if(_data.restaurants.length> 0){ %>
+    <div class="restaurant admin">
+        <div class="rest-header" style="padding-bottom: 0px;">
+            <div class="flex" style="align-items: center; justify-content: start; gap: 16px;">
+                <button class=" btn btn-primary btn-sm mr-2" style="width: 100%;" onclick="window.location.href='/admin/add-menu'" type="button">Yeni
+                    Yemek
+                    Ekle</button>
+                <button class=" btn btn-primary btn-sm mr-2" style="width: 100%;" onclick="window.location.href='/admin/add-restaurant'" type="button">Yeni
+                    Restorant Ekle</button>
+            </div>
+        </div>
+
+    </div>
+
+    <% _data.restaurants.forEach(function(rest) { %>
+    <div class="restaurant admin">
+        <div class="rest-header">
+            <div class="flex" style="align-items: center; justify-content: start; gap: 16px; padding-bottom: 16px; width: 100%;">
+                <a href="/admin/restaurants/<%=rest.id%>/menu">
+                    <img src="/images/rest.png" width="32"></img>
+                </a>
+                <div class="flex" style="align-items: center; justify-content: space-between; gap: 8px; width: 100%;">
+                    <h3>
+                        <a href="/admin/restaurants/<%=rest.id%>/menu">
+                            <%= rest.name %>
+                        </a>
+                    </h3>
+                    <div>
+                        <%= rest.mahalle %> (<%= rest.lat.toFixed(4) %> - <%=
+                                                                    rest.long.toFixed(4) %>)
+                    </div>
+                </div>
+            </div>
+            <div class="flex" style="align-items: center;">
+                <h4 style="padding-left: 3px;">
+                    <%=rest.puan %>&nbsp;
+                    <% let puan=Math.floor(rest.puan); %>
+                    <% let kalan=rest.puan-puan; %>
+                    <% for (let i=0; i < puan; i++) { %>
+                    <i class='bx bxs-star'></i>
+                    <% } %>
+                    <% if (kalan> 0.1) { %>
+                    <i class='bx bxs-star-half'></i>
                     <% } else { %>
-                        <div class="alert alert-warning">Restoran bulunamadı.</div>
-                        <% } %>
+                    <i class='bx bx-star'></i>
+                    <% } %>
+                    <% for (let i=0; i < 5 - puan - 1;
+                                                                                        i++) { %>
+                    <i class='bx bx-star'></i>
+                    <% } %>
+                </h4>
+                <div class="flex" style="align-items: center; justify-content: end; gap: 16px;">
+                    <form action='/admin/delete-restaurant' method="post">
+                        <input type="hidden" name="restaurantid" value="<%= rest.id %>">
+                        <button class="no-button" role="button" type="submit">Sil</button>
+                    </form>
+                    <button class=" btn btn-primary btn-sm mr-2" onclick="window.location.href='/admin/restaurants/<%= rest.id %>'" type="button">Düzenle</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <% }); %>
+
+    <% } else { %>
+    <div class="alert alert-warning"><i class='bx bx-info-circle'></i>Restorant
+        bulunamadı.</div>
+    <% } %>
+</div>

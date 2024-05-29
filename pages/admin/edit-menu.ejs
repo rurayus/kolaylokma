@@ -1,30 +1,56 @@
-<form action="/admin/menus" method="post">
-    <input type="hidden" name="id" value="<%= _data.menuItems.id %>">
-    <div class="form-group row">
-        <label for="restaurant_id" class="col-sm-2 col-form-label">Restaurant Id</label>
-        <div class="col-sm-10">
-            <input class="form-control#restaurant_id" type="text" name="restaurant_id" value="<%= _data.menuItems.restaurant_id %>">
-        </div>
-    </div>
+<div class="general-wrapper">
+    <form action="/admin/menus" method="post" autocomplete="off">
+        <h2>Yemek Düzenle</h2>
 
-    <div class="form-group row">
-        <label for="item_name" class="col-sm-2 col-form-label">Item Name</label>
-        <div class="col-sm-10">
-            <input class="form-control#item_name" type="text" name="item_name" value="<%= _data.menuItems.item_name %>">
-        </div>
-    </div>
+        <input type="hidden" id="menuid" name="menuid" required value="<%= _data.menu.id %>">
+        <input type="hidden" name="restid" id="restid" value="<%= _data.menu.restaurantId %>" required>
 
-    <div class="form-group row">
-        <label for="item_price" class="col-sm-2 col-form-label">Item Price</label>
-        <div class="col-sm-10">
-            <input class="form-control#item_price" type="text" name="item_price" value="<%= _data.menuItems.item_price %>">
+        <div class="input-box">
+            <label for="restaurant">
+                <h3>Restorant</h3>
+            </label>
+            <select class="small" id="restaurant" name="restaurant" type="text" placeholder="Restorant" required <%=_data.restaurants.length==1 ? 'disabled' : '' %>>
+                <% _data.restaurants.forEach(rest=> { %>
+                <option value="<%= rest.id %>" <% if (rest.id===_data.menu.restaurantId) { %> selected <% } %>>
+                    <%= rest.name %>
+                </option>
+                <% }); %>
+            </select>
         </div>
-    </div>
 
-    <div class="form-group row">
-        <div class="col-sm-10 offset-sm-2">
-            <input class="btn btn-primary" type="submit" value="Save Restaurant">
+        <div class="input-box">
+            <label for="kategori">
+                <h3>Kategori</h3>
+            </label>
+            <select class="small" id="kategori" name="kategori" type="text" placeholder="Kategori" required>
+                <% _data.kategoriler.forEach(kategori=> { %>
+                <option value="<%= kategori %>" <% if (kategori===_data.menu.kategori) { %> selected <% } %>>
+                    <%= kategori %>
+                </option>
+                <% }); %>
+            </select>
         </div>
-    </div>
 
-</form>
+        <div class="input-box">
+            <label for="name">
+                <h3>Ürün İsmi</h3>
+            </label>
+            <input class="small" id="name" name="name" type="text" placeholder="Örn: Lahmacun" required value="<%= _data.menu.name %>">
+        </div>
+
+        <div class="input-box">
+            <label for="name">
+                <h3>Fiyat</h3>
+            </label>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 5px;">
+                <input class="small" id="price" name="price" type="number" placeholder="Fiyat" required value="<%= _data.menu.price %>">
+                TL
+            </div>
+        </div>
+
+        <button type="submit" class="btn">Kaydet</button>
+
+    </form>
+</div>
+
+<%- include('../../scripts/admin/edit-menu.ejs') %>

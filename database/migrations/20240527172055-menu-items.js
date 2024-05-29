@@ -3,12 +3,17 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+    await queryInterface.dropTable('menu_items', { force: true });
 
-    await queryInterface.createTable('menu-items', {
+    await queryInterface.createTable('menu_items', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
+      },
+      restaurant_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       name: {
         type: Sequelize.STRING,
@@ -17,11 +22,6 @@ module.exports = {
       price: {
         type: Sequelize.FLOAT,
         allowNull: false
-      },
-      menu: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        unique: true
       },
       kategori: {
         type: Sequelize.STRING,
@@ -33,6 +33,6 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
 
-    await queryInterface.dropTable('menu-items');
+    await queryInterface.dropTable('menu_items');
   }
 };

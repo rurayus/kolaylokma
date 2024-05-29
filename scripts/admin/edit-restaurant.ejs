@@ -1,0 +1,62 @@
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    var lat = document.getElementById('lat');
+    var lng = document.getElementById('lng');
+    var map = L.map('map').setView([lat.value || 41.4500, lng.value || 31.7900], 14);
+    var mapWrapper = document.querySelector('.map-wrapper');
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var customIcon = L.icon({
+        iconUrl: '/images/rest.png',
+        iconSize: [40, 40], // size of the icon
+        iconAnchor: [20, 40]
+    });
+
+    var marker;
+
+    if (lat.value && lng.value) {
+        marker = L.marker([lat.value, lng.value], {
+            icon: customIcon
+        }).addTo(map);
+    }
+
+    map.on('click', function(e) {
+        let latVal = e.latlng.lat.toFixed(5);
+        let lngVal = e.latlng.lng.toFixed(5);
+        lat.value = latVal;
+        lng.value = lngVal;
+
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        marker = L.marker([latVal, lngVal], {
+            icon: customIcon
+        }).addTo(map);
+    });
+
+    lat.addEventListener('input', function() {
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        console.log(lat.value, lng.value);
+
+        marker = L.marker([lat.value, lng.value], {
+            icon: customIcon
+        }).addTo(map);
+    });
+
+    lng.addEventListener('input', function() {
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        marker = L.marker([lat.value, lng.value], {
+            icon: customIcon
+        }).addTo(map);
+    });
+</script>

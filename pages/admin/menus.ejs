@@ -1,46 +1,61 @@
-<% if(typeof action !=='undefined' && action==='edit' ){ %>
-    <div class="alert alert-success">Menü Öğesi güncellendi</div>
+<div class="restaurants">
+    <% if(typeof _data.action !=='undefined' && _data.action==='edit' ){ %>
+    <div class="alert alert-success"><i class='bx bx-info-circle'></i>Menü güncellendi</div>
     <% } %>
 
-        <% if(typeof action !=='undefined' && action==='delete' ){ %>
-            <div class="alert alert-danger">Menü Öğesi silindi</div>
-            <% } %>
+    <% if(typeof _data.action !=='undefined' && _data.action==='add' ){ %>
+    <div class="alert alert-success"><i class='bx bx-info-circle'></i>Ürün menüye eklendi</div>
+    <% } %>
 
-                <% if(_data.menuItems.length> 0){ %>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Restaurant Id</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% _data.menuItems.forEach(function(menuItems) { %>
-                                <tr>
-                                    <td>
-                                        <%= menuItems.restaurant_id %>
-                                    </td>
-                                    <td>
-                                        <%= menuItems.item_name %>
-                                    </td>
-                                    <td>
-                                        <%= menuItems.item_price %> TL
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-primary btn-sm mr-2"
-                                            href="/admin/menus/<%= menuItems.id %>">Edit</a>
-                                        <form action='/admin/delete-menu' method="post">
-                                            <input type="hidden" name="menuItemsid" value="<%= menuItems.id %>">
-                                            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-                                        </form>
-                                    </td>
+    <% if(typeof _data.action !=='undefined' && _data.action==='delete' ){ %>
+    <div class="alert alert-danger"><i class='bx bx-info-circle'></i>Ürün menüden silindi</div>
+    <% } %>
 
-                                </tr>
-                                <% }); %>
-                        </tbody>
-                    </table>
-                    <% } else { %>
-                        <div class="alert alert-warning">Menü öğesi bulunamadı.</div>
-                        <% } %>
+    <div class="restaurant admin">
+        <div class="rest-header" style="padding-bottom: 0px;">
+            <div class="flex" style="align-items: center; justify-content: start; gap: 16px;">
+                <button class=" btn btn-primary btn-sm mr-2" style="width: 100%;" onclick="window.location.href='/admin/restaurants'" type="button">Restorantları Yönet</button>
+                <button class=" btn btn-primary btn-sm mr-2" style="width: 100%;" onclick="window.location.href='/admin/add-menu/<%=_data.restaurant.id%>'" type="button">Yeni Yemek Ekle</button>
+            </div>
+        </div>
+
+    </div>
+    <% if(_data.restaurant.menu.length> 0){ %>
+
+    <% _data.restaurant.menu.forEach(function(menuItem) { %>
+    <div class="restaurant admin">
+        <div class="rest-header">
+            <div class="flex" style="align-items: center; justify-content: start; gap: 16px; padding-bottom: 16px; width: 100%;">
+                <!-- <img src="/images/rest.png" width="32"></img> -->
+                <div class="flex" style="align-items: center; justify-content: space-between; gap: 8px; width: 100%;">
+                    <h3>
+                        <%= menuItem.name %>
+                    </h3>
+                    <div>
+                        <%= menuItem.kategori %>
+                    </div>
+                </div>
+            </div>
+            <div class="flex" style="align-items: center;">
+                <h4>
+                    <%= menuItem.price %> TL
+                </h4>
+                <div class="flex" style="align-items: center; justify-content: end; gap: 16px;">
+                    <form action='/admin/delete-menu' method="post">
+                        <input type="hidden" name="menuid" value="<%= menuItem.id %>">
+                        <input type="hidden" name="restid" value="<%= _data.restaurant.id %>">
+                        <button class="no-button" role="button" type="submit">Sil</button>
+                    </form>
+                    <button class=" btn btn-primary btn-sm mr-2" onclick="window.location.href='/admin/menus/<%= menuItem.id %>'" type="button">Düzenle</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <% }); %>
+
+    <% } else { %>
+    <div class="alert alert-warning"><i class='bx bx-info-circle'></i>Restorant
+        menüsü boş</div>
+    <% } %>
+</div>
