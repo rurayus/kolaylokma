@@ -1,10 +1,9 @@
 const Restaurant = require('../models/restaurants');
-const MenuItem = require('../models/menu');
-
-
+const MenuItems = require('../models/menuItem');
+const { MAHALLELER, KATEGORILER } = require('../constants');
 
 exports.getRestaurant = async (req, res, next) => {
-    const restaurants = await Restaurant.findAll({raw: true});
+    const restaurants = await Restaurant.findAll({ raw: true });
     res.render('admin/restaurants', {
         restaurants: restaurants,
         path: '/admin/restaurants',
@@ -15,108 +14,143 @@ exports.getRestaurant = async (req, res, next) => {
 
 exports.getAddRestaurant = (req, res, next) => {
     res.render('admin/add-restaurant', {
+        mahalleler: MAHALLELER,
         path: '/admin/add-restaurant',
         title: 'Kolaylokma - Restoran Ekle'
     });
 }
 
-exports.postAddRestaurant = (req, res, next) => {
-    const restaurant = new Restaurant();
+exports.postAddRestaurant = async (req, res, next) => {
+    let puan = Math.random() * 5;
+    const restaurant = {
+        name: req.body.name,
+        lat: req.body.lat,
+        long: req.body.long,
+        mahalle: req.body.mahalle,
+        puan: puan.toFixed(1)
+    }
 
-    restaurant.name = req.body.name;
-    restaurant.lat = req.body.lat;
-    restaurant.long = req.body.long;
-    restaurant.menu = req.body.menu;
+    await Restaurant.create(restaurant);
 
-    restaurant.saveRestaurant();
-    res.redirect('/admin/restaurants');
+    res.redirect('/admin/restaurants?action=add');
 }
 
-exports.getEditRestaurant = (req, res, next) => {
+exports.getEditRestaurant = async (req, res, next) => {
 
-    const restaurant = Restaurant.getById(req.params.restaurantid);
-
+    const restaurant = await Restaurant.findOne({ where: { id: req.params.restaurantid }, raw: true });
+    if (!restaurant) {
+        return res.redirect('/admin/restaurants');
+    }
     res.render('admin/edit-restaurant', {
-        path: '/admin/restaurants',
+        path: '/admin/edit-restaurant',
         restaurant: restaurant,
+        mahalleler: MAHALLELER,
         title: 'Kolaylokma - Restoran Düzenle'
     });
 }
 
-exports.postEditRestaurant = (req, res, next) => {
+exports.postEditRestaurant = async (req, res, next) => {
 
-    console.log(req.body)
-    
-    const restaurant = Restaurant.getById(req.body.id);
+    const restaurant = await Restaurant.findOne({ where: { id: req.body.id }, raw: true });
 
     restaurant.name = req.body.name;
     restaurant.lat = req.body.lat;
     restaurant.long = req.body.long;
-    restaurant.menu = req.body.menu;
+    restaurant.mahalle = req.body.mahalle;
 
-    Restaurant.Update(restaurant);
+    await Restaurant.update(restaurant, { where: { id: req.body.id } });
+
     res.redirect('/admin/restaurants?action=edit');
 }
 
-exports.postDeleteRestaurant = (req, res, next) => {
-    Restaurant.DeleteById(req.body.restaurantid);
+exports.postDeleteRestaurant = async (req, res, next) => {
+    await Restaurant.destroy({ where: { id: req.body.restaurantid } });
     res.redirect('/admin/restaurants?action=delete');
 }
 
-exports.getMenuItems = (req, res, next) => {
-    const menuItems = MenuItem.getAll();
+exports.getMenuItems = async (req, res, next) => {
+    const restaurant = await Restaurant.findOne({ where: { id: req.params.restaurantid }, raw: true });
+    if (!restaurant) {
+        return res.redirect('/admin/restaurants');
+    }
+    const menuItems = await MenuItems.findAll({ where: { restaurantId: restaurant.id }, raw: true });
+
+    restaurant.menu = menuItems;
+
+    // if (menuItems.length == 0) {
+    //     return res.redirect('/admin/restaurants');
+    // }
     res.render('admin/menus', {
-        menuItems: menuItems,
+        restaurant: restaurant,
         path: '/admin/menus',
         action: req.query.action,
         title: 'Kolaylokma - Menüler'
     });
 }
 
-exports.getAddMenuItems = (req, res, next) => {
+exports.getAddMenuItems = async (req, res, next) => {
+    var restaurants;
+    if (req.params.restaurantid == undefined) {
+        restaurants = await Restaurant.findAll({ raw: true });
+    } else {
+        let restaurant = await Restaurant.findOne({ where: { id: req.params.restaurantid }, raw: true });
+        if (!restaurant) {
+            return res.redirect('/admin/restaurants');
+        }
+        restaurants = [restaurant];
+    }
+
+    if (restaurants.length == 0) {
+        return res.redirect('/admin/restaurants');
+    }
+
     res.render('admin/add-menu', {
         path: '/admin/add-menu',
+        restaurants: restaurants,
+        kategoriler: KATEGORILER,
         title: 'Kolaylokma - Menü Ekle'
     });
 }
 
-exports.postAddMenuItems = (req, res, next) => {
-    const menuItem = new MenuItem();
+exports.postAddMenuItems = async (req, res, next) => {
+    const menuItem = {
+        restaurantId: req.body.restaurantid,
+        name: req.body.name,
+        price: req.body.price,
+        kategori: req.body.kategori
+    }
 
-    menuItem.restaurant_id = req.body.restaurant_id;
-    menuItem.item_name = req.body.item_name;
-    menuItem.item_price = req.body.item_price;
+    await MenuItems.create(menuItem);
 
-    menuItem.saveMenuItems();
-    res.redirect('/admin/menus');
+    res.redirect('/admin/restaurants/' + req.body.restaurantid + '/menu?action=add');
 }
 
-exports.getEditMenuItems = (req, res, next) => {
-
-    const menuItem = MenuItem.getById(req.params.menuItemsid);
+exports.getEditMenuItems = async (req, res, next) => {
+    const menuItem = await MenuItems.findOne({ where: { id: req.params.menuid }, raw: true });
+    const restaurants = await Restaurant.findAll({ raw: true });
 
     res.render('admin/edit-menu', {
-        path: '/admin/menus',
-        menuItem: menuItem,
+        path: '/admin/edit-menu',
+        menu: menuItem,
+        restaurants: restaurants,
+        kategoriler: KATEGORILER,
         title: 'Kolaylokma - Menü Düzenle'
     });
 }
 
-exports.postEditMenuItems = (req, res, next) => {
+exports.postEditMenuItems = async (req, res, next) => {
+    const menuItem = await MenuItems.findOne({ where: { id: req.body.menuid }, raw: true });
 
-    console.log(req.body)
-    
-    const menuItem = MenuItem.getById(req.body.id);
+    menuItem.name = req.body.name;
+    menuItem.price = req.body.price;
+    menuItem.kategori = req.body.kategori;
+    menuItem.restaurantId = req.body.restid;
 
-    menuItem.restaurant_id = req.body.restaurant_id;
-    menuItem.item_name = req.body.item_name;
-    menuItem.item_price = req.body.item_price;
-
-    MenuItem.Update(menuItem);
-    res.redirect('/admin/menus?action=edit');
+    await MenuItems.update(menuItem, { where: { id: req.body.menuid } });
+    res.redirect('/admin/restaurants/' + req.body.restid + '/menu?action=edit');
 }
 
-exports.postDeleteMenuItems = (req, res, next) => {
-    MenuItem.DeleteById(req.body.menuItemsid);
-    res.redirect('/admin/menus?action=delete');
+exports.postDeleteMenuItems = async (req, res, next) => {
+    await MenuItems.destroy({ where: { id: req.body.menuid } });
+    res.redirect('/admin/restaurants/' + req.body.restid + '/menu?action=delete');
 }

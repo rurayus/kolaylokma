@@ -4,14 +4,15 @@
     padding: 0;
     font-family: 'Rubik', sans-serif;
 }
+
 body {
-    background-color: #d1cebd; 
+    background-color: #d1cebd;
 }
 
 body::after {
     content: "";
     background-image: url(/images/wllppr.jpg);
-    opacity: 15%; 
+    opacity: 15%;
     position: fixed;
     top: 0;
     left: 0;
@@ -20,20 +21,53 @@ body::after {
     z-index: -1;
     background-size: cover;
 }
+
 #map {
-    width: 800px; 
-    height: 500px; 
-    border: 2px solid #8a0c27; 
+    width: 800px;
+    height: 500px;
+    border: 2px solid #8a0c27;
     position: relative;
     z-index: 1;
-    border-radius: 5%;
+    border-radius: 24px;
 }
-li, a, button {
+
+.general-wrapper #map {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.map-dummy {
+    margin-top: 100%;
+}
+
+.map-wrapper {
+    margin-top: 30px;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+li,
+a,
+button:not(.no-button),
+.no-button {
     font-weight: 700;
     font-size: 20px;
     color: #8a0c27;
     text-decoration: none;
 }
+
+button.no-button {
+    height: 33px;
+    border: none;
+    cursor: pointer;
+}
+
 header {
     display: flex;
     justify-content: flex-end;
@@ -41,6 +75,7 @@ header {
     padding: 20px 10%;
     background-color: #edefe8;
 }
+
 .logo {
     cursor: pointer;
     margin-right: auto;
@@ -60,7 +95,7 @@ header {
     color: #f57b51;
 }
 
-button {
+button:not(.no-button) {
     height: 33px;
     width: 150px;
     background-color: #8a0c27;
@@ -71,7 +106,7 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
+button:not(.no-button):hover {
     background-color: #f57b51;
 }
 
@@ -96,6 +131,10 @@ button:hover {
     text-align: center;
 }
 
+.wrapper h2 {
+    text-align: center;
+}
+
 .wrapper .input-box {
     position: relative;
     width: 100%;
@@ -103,7 +142,45 @@ button:hover {
     margin: 30px 0;
 }
 
-.input-box input {
+.general-wrapper {
+    align-items: center;
+    justify-content: center;
+    background: #edefe8;
+    color: #8a0c27;
+    margin: 50px auto 20px auto;
+    width: 420px;
+    border-radius: 10px;
+    padding: 30px 40px;
+    border: 2px solid #8a0c27;
+}
+
+.general-wrapper .link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.general-wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+.general-wrapper h2 {
+    text-align: center;
+}
+
+.general-wrapper .input-box {
+    position: relative;
+    width: 100%;
+    margin: 30px 0;
+}
+
+
+.general-wrapper .input-box h3 {
+    padding: 0 0 8px 0;
+}
+
+.input-box input,
+.input-box select {
     width: 100%;
     height: 100%;
     background: transparent;
@@ -112,11 +189,16 @@ button:hover {
     border-radius: 40px;
     padding-right: 30px;
     font-size: 17px;
-    padding: 20px 45px 20px 20px;
+    padding: 0px 20px 0px 20px;
+    min-height: 40px;
 }
 
 .input-box input::placeholder {
     color: black;
+}
+
+.input-box .small::placeholder {
+    color: #8a0c27;
 }
 
 .remember-forgot {
@@ -131,6 +213,12 @@ button:hover {
 }
 
 .wrapper .btn {
+    width: 100%;
+    height: 50px;
+    font-weight: 500;
+}
+
+.general-wrapper .btn {
     width: 100%;
     height: 50px;
     font-weight: 500;
@@ -223,7 +311,7 @@ button:hover {
 
 
 .filter-button {
-    width: 100%;
+    width: 100% !important;
 }
 
 .filter-button.clicked {
@@ -238,7 +326,14 @@ button:hover {
 
 .input-box #minFiyat,
 .input-box #maxFiyat {
-    width: 35%;
+    height: 17px;
+    background: transparent;
+    border: 1px solid black;
+    font-size: 15px;
+    display: inline-block;
+}
+
+.input-box .small {
     height: 17px;
     background: transparent;
     border: 1px solid black;
@@ -313,4 +408,147 @@ button:hover {
 .custom-combobox img {
     width: 20px;
     height: 20px;
+}
+
+.restaurants {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.restaurant {
+    min-width: 360px;
+    width: 36%;
+    max-width: 900px;
+    background: #fff;
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.restaurant h2 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    color: #333;
+}
+
+.restaurant p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.restaurant .rest-header {
+    text-align: center;
+}
+
+.restaurant.admin .rest-header {
+    text-align: left;
+}
+
+
+.restaurant .puan {
+    color: #f57b51;
+    /* color: #f1c40f; */
+}
+
+.menus {
+    margin-top: 15px;
+}
+
+.menu {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 3px;
+}
+
+.menu .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #555;
+}
+
+.menu p {
+    margin: 5px 0;
+    color: #888;
+}
+
+.alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    min-width: 360px;
+    width: 36%;
+    max-width: 900px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #c4e3f3;
+    color: #31708f;
+    border-color: #b6d7e8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.alert.alert-success {
+    background-color: #d0e9c6;
+    color: #3c763d;
+    border-color: #b2dba1;
+}
+
+.alert.alert-info {
+    background-color: #c4e3f3;
+    color: #31708f;
+    border-color: #b6d7e8;
+}
+
+.alert.alert-warning {
+    background-color: #fcf8e3;
+    color: #8a6d3b;
+    border-color: #faebcc;
+}
+
+.alert.alert-danger {
+    background-color: #f9c6c6;
+    color: #a94442;
+    border-color: #e89797;
+}
+
+.restaurant.admin {
+    padding: 16px;
+    margin: 12px 0;
+    background: #edefe8;
+    color: #8a0c27 !important;
+    border-radius: 10px !important;
+    border: 2px solid #8a0c27 !important;
+    box-shadow: none !important;
+}
+
+.restaurant.admin .flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.restaurant.admin .flex.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.leaflet-container a {
+    font-size: 0.75rem;
+}
+
+.leaflet-container a.rest-link {
+    font-size: 1rem;
 }

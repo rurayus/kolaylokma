@@ -1,35 +1,46 @@
-<form action="/admin/add-restaurant" method="post">
-    <div class="form-group row">
-        <label for="name" class="col-sm-2 col-form-label">Name</label>
-        <div class="col-sm-10">
-            <input class = "form-control#name" type="text" name="name">
-        </div>
-    </div>
+<div class="general-wrapper">
+    <form action="/admin/add-restaurant" method="post" autocomplete="off">
+        <h2>Restorant Ekle</h2>
 
-    <div class="form-group row">
-        <label for="lat" class="col-sm-2 col-form-label">Latitude</label>
-        <div class="col-sm-10">
-            <input class = "form-control#lat" type="text" name="lat">
+        <div class="input-box">
+            <label for="name">
+                <h3>Restorant İsmi</h3>
+            </label>
+            <input class="small" id="name" name="name" type="text" placeholder="İsmi" required>
         </div>
-    </div>
 
-    <div class="form-group row">
-        <label for="long" class="col-sm-2 col-form-label">Longitude</label>
-        <div class="col-sm-10">
-            <input class = "form-control#long" type="text" name="long">
+        <div class="input-box">
+            <label for="mahalle">
+                <h3>Mahalle</h3>
+            </label>
+            <select class="small" id="mahalle" name="mahalle" type="text" placeholder="Mahalle" required>
+                <option disabled selected value>Seçiniz</option>
+                <% _data.mahalleler.forEach(mahalle=> { %>
+                <option value="<%= mahalle %>">
+                    <%= mahalle %>
+                </option>
+                <% }); %>
+            </select>
         </div>
-    </div>
 
-    <div class="form-group row">
-        <label for="menu" class="col-sm-2 col-form-label">Menu</label>
-        <div class="col-sm-10">
-            <input class = "form-control#menu" type="text" name="menu">
+        <div class="input-box">
+            <label for="name">
+                <h3>Konum</h3>
+            </label>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 5px;">
+                <input class="small" id="lat" name="lat" type="number" placeholder="Enlem" step="0.00001" required>
+                -
+                <input class="small" id="lng" name="long" type="number" placeholder="Boylam" step="0.00001" required>
+            </div>
+            <div class="map-wrapper">
+                <div class="map-dummy"></div>
+                <div id="map"></div>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group row">
-        <div class="col-sm-10 offset-sm-2">
-            <input class = "btn btn-primary" type="submit" value="Save Restaurant">
-        </div>
-    </div>
-</form>
+        <button type="submit" class="btn">Ekle</button>
+
+    </form>
+</div>
+
+<%- include('../../scripts/admin/add-restaurant.ejs') %>

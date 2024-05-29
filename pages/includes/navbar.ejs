@@ -1,15 +1,21 @@
 <header>
     <a href="/" class="logo"><img src="/images/logo.png" alt="Kolaylokma logo" style="width:150px; height: auto;"></a>
     <nav>
-        <ul class="nav_links">
-            <% if(_data.userdata !=undefined) { %> <!-- Oturum açılmış kullanıcı varsa -->
-                <li class="birinci"><a href="/logout">Çıkış Yap</a></li>
-                <% } else { %> <!-- Oturum açılmış kullanıcı yoksa -->
-                    <li class="birinci"><a href="/login">Giriş Yap</a></li>
-                    <li class="ikinci"><a href="/register">Kayıt Ol</a></li>
-                    <% } %>
+        <ul class=" nav_links">
+            <% if(_data.userdata !=undefined) { %>
+            <!-- Oturum açılmış kullanıcı varsa -->
+            <li class="birinci" style="display: flex; align-items: center;">
+                <a style="color: rgb(100, 100, 100); font-weight: 500; font-size: 1rem; margin-right: 0.4rem">
+                    <%= _data.userdata %>&nbsp;-
+                </a>
+                <a href="/logout">Çıkış Yap</a>
+            </li>
+            <% } else { %>
+            <!-- Oturum açılmış kullanıcı yoksa -->
+            <li class="birinci"><a href="/login">Giriş Yap</a></li>
+            <li class="ikinci"><a href="/register">Kayıt Ol</a></li>
+            <% } %>
         </ul>
     </nav>
-    <%=_data.userdata %>
     <a class="cta" href="/hakkimizda"><button>Hakkımızda</button></a>
 </header>

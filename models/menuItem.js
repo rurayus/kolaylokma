@@ -1,11 +1,16 @@
 const db = require('../database');
 const { Sequelize } = db.Sequelize;
 
-const MenuItem = db.define('MenuItem', {
+const MenuItem = db.define('menu_items', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
+  },
+  restaurantId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    unique: true
   },
   name: {
     type: Sequelize.STRING,
@@ -15,17 +20,13 @@ const MenuItem = db.define('MenuItem', {
     type: Sequelize.FLOAT,
     allowNull: false
   },
-  restaurantId: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: 'restaurants',
-      key: 'id'
-    },
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
+  kategori: {
+    type: Sequelize.STRING,
+    allowNull: false
   }
 }, {
-  timestamps: false // Bu alanı eklediğimizde Sequelize createdAt ve updatedAt alanlarını otomatik olarak eklemez
+  timestamps: false,
+  underscored: true
 });
 
 module.exports = MenuItem;

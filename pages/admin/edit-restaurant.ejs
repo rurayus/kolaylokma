@@ -1,37 +1,51 @@
-<form action="/admin/restaurants" method="post">
-    <input type="hidden" name="id" value="<%= _data.restaurant.id %>">
-    <div class="form-group row">
-        <label for="name" class="col-sm-2 col-form-label">Name</label>
-        <div class="col-sm-10">
-            <input class="form-control#name" type="text" name="name" value="<%= _data.restaurant.name %>">
-        </div>
-    </div>
+<div class="general-wrapper">
+    <form action="/admin/restaurants" method="post" autocomplete="off">
+        <h2>Restorant Düzenle</h2>
 
-    <div class="form-group row">
-        <label for="lat" class="col-sm-2 col-form-label">Lat</label>
-        <div class="col-sm-10">
-            <input class="form-control#lat" type="text" name="lat" value="<%= _data.restaurant.lat %>">
-        </div>
-    </div>
+        <input type="hidden" name="id" value="<%= _data.restaurant.id %>">
 
-    <div class="form-group row">
-        <label for="long" class="col-sm-2 col-form-label">Long</label>
-        <div class="col-sm-10">
-            <input class="form-control#long" type="text" name="long" value="<%= _data.restaurant.long %>">
+        <div class="input-box">
+            <label for="name">
+                <h3>Restorant İsmi</h3>
+            </label>
+            <input class="small" id="name" name="name" type="text" placeholder="İsmi" value="<%= _data.restaurant.name %>" required>
         </div>
-    </div>
 
-    <div class="form-group row">
-        <label for="menu" class="col-sm-2 col-form-label">Menu</label>
-        <div class="col-sm-10">
-            <input class="form-control#menu" type="text" name="menu" value="<%= _data.restaurant.menu %>">
+        <div class="input-box">
+            <label for="mahalle">
+                <h3>Mahalle</h3>
+            </label>
+            <select class="small" id="mahalle" name="mahalle" type="text" placeholder="Mahalle" value="<%= _data.restaurant.mahalle %>" required>
+                <% _data.mahalleler.forEach(mahalle=> { %>
+                <option value="<%= mahalle %>" <% if (mahalle===_data.restaurant.mahalle) { %> selected <% } %>>
+                    <%= mahalle %>
+                </option>
+                <% }); %>
+            </select>
         </div>
-    </div>
 
-    <div class="form-group row">
-        <div class="col-sm-10 offset-sm-2">
-            <input class="btn btn-primary" type="submit" value="Save Restaurant">
+        <div class="input-box">
+            <label for="name">
+                <h3>Konum</h3>
+            </label>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 5px;">
+                <input class="small" id="lat" name="lat" type="number" placeholder="Enlem (Latitude)" step="0.00001" value="<%= _data.restaurant.lat %>" required>
+                -
+                <input class="small" id="lng" name="long" type="number" placeholder="Boylam (Longitude)" step="0.00001" value="<%= _data.restaurant.long %>" required>
+            </div>
+            <div class="map-wrapper">
+                <div class="map-dummy"></div>
+                <div id="map"></div>
+            </div>
         </div>
-    </div>
+        <button type="submit" class="btn">Kaydet</button>
 
-</form>
+
+
+        <div class="link">
+            <a href="/admin/restaurants/<%=_data.restaurant.id%>/menu" class="btn link">Menüyü Düzenle</a>
+        </div>
+    </form>
+</div>
+
+<%- include('../../scripts/admin/edit-restaurant.ejs') %>
